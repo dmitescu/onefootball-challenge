@@ -9,11 +9,8 @@ import (
 	"os"
 )
 
-const (
-	baseURL string = os.Getenv("ONEFOOTBALL_BASE_URL")
-)
-
 func GetUrl(tid int) string {
+	baseURL := os.Getenv("ONEFOOTBALL_BASE_URL")
 	return fmt.Sprintf("%s/%d.json", baseURL, tid)
 }
 
