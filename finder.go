@@ -37,12 +37,13 @@ func TeamFinderHandler() func() (*QueryResponse, error) {
 	return func() (*QueryResponse, error) {
 		counterMutex.Lock()
 		currentId = currentId + 1
+		cid := currentId
 		counterMutex.Unlock()
 		
 		var allFound bool = true
 		var isMatch bool = false
 		
-		if (currentId > maxId) {
+		if (cid > maxId) {
 			return nil, errors.New("maximum id reached")
 		}
 
@@ -54,7 +55,7 @@ func TeamFinderHandler() func() (*QueryResponse, error) {
 			return nil, errors.New("all teams have been found")
 		}
 
-		response, _ := QueryId(currentId)
+		response, _ := QueryId(cid)
 
 		for t, _ := range teamMap {
 			if (response.Data.Team.Name == t) {
